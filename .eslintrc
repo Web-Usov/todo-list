@@ -1,0 +1,45 @@
+{
+    "extends": [
+        "standard",
+        "prettier",
+        "prettier/standard",
+        "prettier/react",
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "plugins": [
+        "prettier",
+        "standard",
+        "import",
+        "react",
+        "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "rules": {
+        "prettier/prettier": "error",
+        "@typescript-eslint/indent": ["error", 4],
+        "@typescript-eslint/interface-name-prefix": [
+            "error",
+            "always"
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+            "warn",
+            {
+                "allowExpressions": true
+            }
+        ]
+    },
+    "globals": {
+        "localStorage": true
+    },
+}
