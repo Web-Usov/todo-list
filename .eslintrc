@@ -28,18 +28,16 @@
     "rules": {
         "prettier/prettier": "error",
         "@typescript-eslint/indent": ["error", 4],
-        "@typescript-eslint/interface-name-prefix": [
-            "error",
-            "always"
-        ],
+        "@typescript-eslint/interface-name-prefix": ["error", "always"],
         "@typescript-eslint/explicit-function-return-type": [
             "warn",
             {
                 "allowExpressions": true
             }
-        ]
+        ],
+        "@typescript-eslint/no-empty-function": "off"
     },
     "globals": {
         "localStorage": true
-    },
+    }
 }

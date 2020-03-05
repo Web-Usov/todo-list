@@ -1,75 +1,74 @@
 {
-	"name": "todo-list",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@material-ui/core": "^4.9.5",
-		"@material-ui/icons": "^4.9.1",
-		"mobx": "^5.15.4",
-		"mobx-react": "^6.1.8",
-		"mobx-state-tree": "^3.15.0",
-		"react": "^16.13.0",
-		"react-dom": "^16.13.0",
-		"react-scripts": "3.4.0",
-		"typescript": "^3.7.5",
-		"uuid": "^7.0.2"
-	},
-	"scripts": {
-		"start": "env-cmd -f ./.env env-cmd -f ./.env.local react-scripts start",
-		"build:development": "env-cmd -f ./.env react-scripts build",
-		"build:production": "env-cmd -f ./.env.production react-scripts build",
-		"eject": "react-scripts eject",
-		"review": "npm run eslint",
-		"eslint": "eslint --ext .ts ./src",
-		"eslint:fix": "npm run eslint -- --fix",
-		"precommit": "lint-staged"
-	},
-	"eslintConfig": {
-		"extends": "react-app"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"./**/*.ts": [
-			"./node_modules/.bin/prettier --write",
-			"./node_modules/.bin/eslint --fix --ext .ts"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"devDependencies": {
-		"@types/jest": "^24.9.1",
-		"@types/node": "^12.12.29",
-		"@types/react": "^16.9.23",
-		"@types/react-dom": "^16.9.5",
-		"@types/uuid": "^7.0.0",
-		"@typescript-eslint/eslint-plugin": "^2.22.0",
-		"@typescript-eslint/parser": "^2.22.0",
-		"env-cmd": "^10.1.0",
-		"eslint": "^6.8.0",
-		"eslint-config-prettier": "^6.10.0",
-		"eslint-config-standard": "^14.1.0",
-		"eslint-plugin-import": "^2.20.1",
-		"eslint-plugin-node": "^11.0.0",
-		"eslint-plugin-prettier": "^3.1.2",
-		"eslint-plugin-promise": "^4.2.1",
-		"eslint-plugin-react": "^7.18.3",
-		"eslint-plugin-standard": "^4.0.1",
-		"husky": "^4.2.3",
-		"lint-staged": "^10.0.8",
-		"prettier": "^1.19.1"
-	}
+    "name": "todo-list",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "^4.9.5",
+        "@material-ui/icons": "^4.9.1",
+        "mobx": "^5.15.4",
+        "mobx-react": "^6.1.8",
+        "mobx-state-tree": "^3.15.0",
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0",
+        "react-scripts": "3.4.0",
+        "typescript": "^3.7.5",
+        "uuid": "^7.0.2"
+    },
+    "scripts": {
+        "start": "env-cmd -f ./.env env-cmd -f ./.env.local react-scripts start",
+        "build:development": "env-cmd -f ./.env react-scripts build",
+        "build:production": "env-cmd -f ./.env.production react-scripts build",
+        "eject": "react-scripts eject",
+        "review": "npm run eslint",
+        "eslint": "eslint --ext .ts ./src",
+        "eslint:fix": "npm run eslint -- --fix"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "./**/*.ts": [
+            "./node_modules/.bin/prettier --write",
+            "eslint -c .eslintrc --ext .ts ./src"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/jest": "^24.9.1",
+        "@types/node": "^12.12.29",
+        "@types/react": "^16.9.23",
+        "@types/react-dom": "^16.9.5",
+        "@types/uuid": "^7.0.0",
+        "@typescript-eslint/eslint-plugin": "^2.22.0",
+        "@typescript-eslint/parser": "^2.22.0",
+        "env-cmd": "^10.1.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.0",
+        "eslint-config-standard": "^14.1.0",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-node": "^11.0.0",
+        "eslint-plugin-prettier": "^3.1.2",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-react": "^7.18.3",
+        "eslint-plugin-standard": "^4.0.1",
+        "husky": "^4.2.3",
+        "lint-staged": "^10.0.8",
+        "prettier": "^1.19.1"
+    }
 }
