@@ -12,7 +12,8 @@ const TodoList: React.FC<ITodoListProps> = ({
     items,
     onAdd,
     onDelete,
-    onFlag
+    onFlag,
+    onEdit
 }: ITodoListProps) => {
     const [
         isOpen,
@@ -32,6 +33,12 @@ const TodoList: React.FC<ITodoListProps> = ({
             }
         );
     };
+    const handleFlag = (id: string): void => {
+        onFlag(id);
+    };
+    const handleEdit = (id: string, title: string): void => {
+        onEdit(id, title);
+    };
     return (
         <React.Fragment>
             <TodoListContainer>
@@ -46,8 +53,11 @@ const TodoList: React.FC<ITodoListProps> = ({
                                 <TodoListItem
                                     key={id}
                                     {...item}
-                                    onDelete={handleDelete}
-                                    onFlag={onFlag}
+                                    onDelete={() => handleDelete(item.id)}
+                                    onFlag={() => handleFlag(item.id)}
+                                    onEdit={(title: string) =>
+                                        handleEdit(item.id, title)
+                                    }
                                 />
                             ))}
                         </div>

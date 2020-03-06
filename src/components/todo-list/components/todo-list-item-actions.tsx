@@ -1,30 +1,21 @@
-import React, { ReactElement, useState } from "react";
-import { TodoListItemStyled } from "../styles";
-import { ITodoListItemProps } from "../types";
-import { styled } from "@material-ui/core/styles";
-import { Typography, IconButton } from "@material-ui/core";
+import React, { ReactElement } from "react";
+import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckBoxOff from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxOn from "@material-ui/icons/CheckBox";
 import theme from "entry/theme";
+import { ITodoListItemActionsProps } from "../types";
 
-export const TodoListItem = ({
+export const TodoListItemActions = ({
     onDelete,
     onFlag,
     onEdit,
-    title,
-    id,
-    isDone
-}: ITodoListItemProps): ReactElement => {
-    const [isEdit, setEdit] = useState<boolean>(false);
+    isDone,
+    isEdit
+}: ITodoListItemActionsProps): ReactElement => {
     return (
         <div>
-            <IconButton
-                aria-label="Flag"
-                onClick={() => {
-                    onFlag(id);
-                }}
-            >
+            <IconButton aria-label="Flag" onClick={onFlag}>
                 {isDone ? (
                     <CheckBoxOn
                         fontSize="small"
@@ -38,12 +29,7 @@ export const TodoListItem = ({
                     <CheckBoxOff fontSize="small" />
                 )}
             </IconButton>
-            <IconButton
-                aria-label="Delete"
-                onClick={() => {
-                    onDelete(id);
-                }}
-            >
+            <IconButton aria-label="Delete" onClick={onDelete}>
                 <DeleteIcon fontSize="small" />
             </IconButton>
         </div>

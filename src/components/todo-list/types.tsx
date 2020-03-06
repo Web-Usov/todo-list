@@ -1,16 +1,24 @@
 export interface ITodoListItem {
     title: string;
     id: string;
-    isDone?: boolean;
-}
-export interface ITodoListItemProps extends ITodoListItem {
-    onDelete: (id: string) => void;
-    onFlag: (id: string) => void;
-    isEdit?: boolean;
-    onEdit?: (title?: string) => void;
+    isDone: boolean;
 }
 export interface ITodoListItemCreate {
     title: string;
+}
+
+export interface ITodoListItemProps extends ITodoListItem {
+    onDelete: () => void;
+    onFlag: () => void;
+    onEdit: (title: string) => void;
+}
+
+export interface ITodoListItemActionsProps {
+    onFlag: () => void;
+    onDelete: () => void;
+    onEdit: (title: string) => void;
+    isEdit: boolean;
+    isDone: boolean;
 }
 export interface ITodoListProps {
     items: ITodoListItem[];

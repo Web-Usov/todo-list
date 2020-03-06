@@ -1,12 +1,9 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import { TodoListItemStyled } from "../styles";
 import { ITodoListItemProps } from "../types";
 import { styled } from "@material-ui/core/styles";
-import { Typography, IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-import CheckBoxOff from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxOn from "@material-ui/icons/CheckBox";
-import theme from "entry/theme";
+import { Typography } from "@material-ui/core";
+import { TodoListItemActions } from "./todo-list-item-actions";
 
 const Title = styled(Typography)({
     flexGrow: 1,
@@ -14,53 +11,27 @@ const Title = styled(Typography)({
     whiteSpace: "nowrap",
     marginRight: 10
 });
-export const TodoListItem = ({
-    onDelete,
-    onFlag,
-    title,
-    id,
-    isDone
-}: ITodoListItemProps): ReactElement => {
-    // const [isEdit, setEdit] = useState<boolean>(false);
+export const TodoListItem = (props: ITodoListItemProps): ReactElement => {
+    const [isEdit, setEdit] = useState<boolean>(false);
+    const handleEdit = (title: string): void => {
+        props.onEdit(title);
+        setEdit(false);
+    };
     return (
         <TodoListItemStyled>
             <Title
                 variant="h6"
                 style={{
-                    opacity: isDone ? 0.5 : 1
+                    opacity: props.isDone ? 0.5 : 1
                 }}
             >
-                {title}
+                {props.title}
             </Title>
-            <div>
-                <IconButton
-                    aria-label="Flag"
-                    onClick={() => {
-                        onFlag(id);
-                    }}
-                >
-                    {isDone ? (
-                        <CheckBoxOn
-                            fontSize="small"
-                            style={{
-                                color: isDone
-                                    ? theme.palette.success.main
-                                    : theme.palette.divider
-                            }}
-                        />
-                    ) : (
-                        <CheckBoxOff fontSize="small" />
-                    )}
-                </IconButton>
-                <IconButton
-                    aria-label="Delete"
-                    onClick={() => {
-                        onDelete(id);
-                    }}
-                >
-                    <DeleteIcon fontSize="small" />
-                </IconButton>
-            </div>
+            <TodoListItemActions
+                {...props}
+                isEdit={isEdit}
+                onEdit={handleEdit}
+            />
         </TodoListItemStyled>
     );
 };
