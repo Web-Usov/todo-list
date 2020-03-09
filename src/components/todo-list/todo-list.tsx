@@ -23,9 +23,9 @@ const TodoList: React.FC<ITodoListProps> = ({
         openDialog,
         closeDialog
     ] = useConfirmDialog();
-    const handleDelete = (taskId: string): void => {
+    const handleDelete = (taskId: string, taskTtitle?: string): void => {
         openDialog(
-            "Delete task",
+            taskTtitle ? `Delete task "${taskTtitle}"` : `Delete task`,
             "Are you sure you would like to delete current task?",
             () => {
                 closeDialog();
@@ -53,7 +53,9 @@ const TodoList: React.FC<ITodoListProps> = ({
                                 <TodoListItem
                                     key={id}
                                     {...item}
-                                    onDelete={() => handleDelete(item.id)}
+                                    onDelete={() =>
+                                        handleDelete(item.id, item.title)
+                                    }
                                     onFlag={() => handleFlag(item.id)}
                                     onEdit={(title: string) =>
                                         handleEdit(item.id, title)

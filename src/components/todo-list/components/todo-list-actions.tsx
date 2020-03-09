@@ -17,7 +17,6 @@ const TodoListActions = ({ onAdd }: ITodoListActionsProps): ReactElement => {
         <TodoListActionsStyled>
             <StyledButton
                 variant="contained"
-                // color="secsuess"
                 onClick={() =>
                     onAdd({
                         title: "loren ren loren "

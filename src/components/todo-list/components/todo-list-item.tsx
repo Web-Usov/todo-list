@@ -22,7 +22,7 @@ export const TodoListItem = (props: ITodoListItemProps): ReactElement => {
             <Title
                 variant="h6"
                 style={{
-                    opacity: props.isDone ? 0.5 : 1
+                    opacity: props.isDone ? 0.3 : 1
                 }}
             >
                 {props.title}
