@@ -4,30 +4,33 @@ import {
     resolveIdentifier,
     getSnapshot
 } from "mobx-state-tree";
-import TodoListItemModel, {
-    TTodoListItemModel
-} from "models/todo-list/todo-list-item.model";
+import TaskModel, { TTaskModel } from "models/todo-list/todo-list-item.model";
 import { v4 as uuid } from "uuid";
 import { autorun } from "mobx";
 
 const TodoListStore = types
     .model("TodoListStore", {
-        tasks: types.optional(types.array(TodoListItemModel), [])
+        tasks: types.optional(types.array(TaskModel), [])
     })
+    .views(self => ({
+        get completedTasks(): TTaskModel[] {
+            return self.tasks.filter(t => t.isDone);
+        }
+    }))
     .actions(self => ({
-        add: (task: Partial<TTodoListItemModel>) => {
+        add: (task: Partial<TTaskModel>) => {
             self.tasks.push({ ...task, id: uuid() });
         },
         remove: (id: string) => {
-            const task = resolveIdentifier(TodoListItemModel, self.tasks, id);
+            const task = resolveIdentifier(TaskModel, self.tasks, id);
             if (task) destroy(task);
         },
         flag: (id: string) => {
-            const task = resolveIdentifier(TodoListItemModel, self.tasks, id);
+            const task = resolveIdentifier(TaskModel, self.tasks, id);
             if (task) task.isDone = !task.isDone;
         },
         edit: (id: string, title: string) => {
-            const task = resolveIdentifier(TodoListItemModel, self.tasks, id);
+            const task = resolveIdentifier(TaskModel, self.tasks, id);
             if (task) task.title = title;
         }
     }))

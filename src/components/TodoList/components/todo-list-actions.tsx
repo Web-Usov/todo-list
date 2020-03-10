@@ -1,9 +1,12 @@
 import React, { ReactElement } from "react";
 import { Button } from "@material-ui/core";
-import { ITodoListActionsProps } from "../types";
 import { TodoListActionsStyled } from "../styles";
 import { styled } from "@material-ui/core/styles";
+import { ITodoListItemCreate } from "../types";
 
+interface ITodoListActionsProps {
+    onAdd: (task: ITodoListItemCreate) => void;
+}
 const StyledButton = styled(Button)(({ theme }) => ({
     backgroundColor: theme.palette.success.light,
     "&:hover": {

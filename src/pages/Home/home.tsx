@@ -1,6 +1,6 @@
 import React from "react";
 import { HomeContainer } from "./styles";
-import TodoList from "components/todo-list";
+import TodoList from "components/TodoList";
 import todoListStore from "store/todo-list";
 import { observer } from "mobx-react";
 import { Typography, styled } from "@material-ui/core";
@@ -18,7 +18,8 @@ const HomePage: React.FC = () => {
                 Todo List
             </Title>
             <TodoList
-                items={todoListStore.tasks}
+                completedTasks={todoListStore.completedTasks}
+                tasks={todoListStore.tasks}
                 onAdd={todoListStore.add}
                 onDelete={todoListStore.remove}
                 onFlag={todoListStore.flag}

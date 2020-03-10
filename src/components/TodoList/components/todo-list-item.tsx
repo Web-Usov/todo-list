@@ -1,14 +1,21 @@
 import React, { ReactElement, useState } from "react";
 import { TodoListItemStyled } from "../styles";
-import { ITodoListItemProps } from "../types";
 import { styled } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import { TodoListItemActions } from "./todo-list-item-actions";
+import { ITodoListItem } from "../types";
+
+interface ITodoListItemProps extends ITodoListItem {
+    onDelete: () => void;
+    onFlag: () => void;
+    onEdit: (title: string) => void;
+}
 
 const Title = styled(Typography)({
     flexGrow: 1,
     overflow: "hidden",
     whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
     marginRight: 10
 });
 export const TodoListItem = (props: ITodoListItemProps): ReactElement => {

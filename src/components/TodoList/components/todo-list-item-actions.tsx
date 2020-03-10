@@ -4,8 +4,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckBoxOff from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxOn from "@material-ui/icons/CheckBox";
 import theme from "entry/theme";
-import { ITodoListItemActionsProps } from "../types";
 
+interface ITodoListItemActionsProps {
+    onFlag: () => void;
+    onDelete: () => void;
+    onEdit: (title: string) => void;
+    isEdit: boolean;
+    isDone: boolean;
+}
 export const TodoListItemActions = ({
     onDelete,
     onFlag,
@@ -14,7 +20,7 @@ export const TodoListItemActions = ({
     isEdit
 }: ITodoListItemActionsProps): ReactElement => {
     return (
-        <div>
+        <div style={{ flexShrink: 0 }}>
             <IconButton aria-label="Flag" onClick={onFlag}>
                 {isDone ? (
                     <CheckBoxOn

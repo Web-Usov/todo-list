@@ -1,15 +1,34 @@
 import React from "react";
 import { TodoListPaper, TodoListContainer } from "./styles";
-import { ITodoListProps } from "./types";
 import { TodoListItem } from "./components/todo-list-item";
 import { Typography } from "@material-ui/core";
 import { observer } from "mobx-react";
 import TodoListActions from "./components/todo-list-actions";
-import { useConfirmDialog } from "hooks";
-import { ConfirmDialog } from "components/Dialog";
+import TodoListAddForm from "./components/todo-list-add-form";
+import { useConfirmDialog, useFormModal } from "hooks";
+import { ConfirmDialog, FormModal } from "components/Dialog";
+import { ITodoListItem, ITodoListItemCreate } from "./types";
+import {
+    ADD_TASK_TITLE,
+    DELETE_TASK_TITLE,
+    DELETE_TASK_MESSAGE,
+    TODO_LIST_EMPTY
+} from "helpers/constants";
+import { TodoListProgress } from "./components/todo-list-progress";
+
+interface ITodoListProps {
+    tasks: ITodoListItem[];
+    completedTasks: ITodoListItem[];
+
+    onAdd: (task: ITodoListItemCreate) => void;
+    onDelete: (id: string) => void;
+    onFlag: (id: string) => void;
+    onEdit: (id: string, title: string) => void;
+}
 
 const TodoList: React.FC<ITodoListProps> = ({
-    items,
+    tasks,
+    completedTasks,
     onAdd,
     onDelete,
     onFlag,
@@ -23,33 +42,68 @@ const TodoList: React.FC<ITodoListProps> = ({
         openDialog,
         closeDialog
     ] = useConfirmDialog();
+
+    const [
+        isOpenForm,
+        titleForm,
+        contentForm,
+        sendForm,
+        openForm,
+        closeForm
+    ] = useFormModal<ITodoListItemCreate>();
+
+    const handleAdd = (): void => {
+        openForm(
+            ADD_TASK_TITLE,
+            <TodoListAddForm
+                onAdd={(values?: ITodoListItemCreate) => {
+                    closeForm();
+                    values && onAdd(values);
+                }}
+            />,
+            (values?: ITodoListItemCreate) => {
+                closeForm();
+                values && onAdd(values);
+            }
+        );
+    };
+
     const handleDelete = (taskId: string, taskTtitle?: string): void => {
         openDialog(
-            taskTtitle ? `Delete task "${taskTtitle}"` : `Delete task`,
-            "Are you sure you would like to delete current task?",
+            taskTtitle
+                ? `${DELETE_TASK_TITLE} "${taskTtitle}"`
+                : DELETE_TASK_TITLE,
+            DELETE_TASK_MESSAGE,
             () => {
                 closeDialog();
                 onDelete(taskId);
             }
         );
     };
+
     const handleFlag = (id: string): void => {
         onFlag(id);
     };
+
     const handleEdit = (id: string, title: string): void => {
         onEdit(id, title);
     };
+
     return (
         <React.Fragment>
             <TodoListContainer>
                 <TodoListPaper>
-                    {!items.length ? (
+                    {!tasks.length ? (
                         <Typography align="center">
-                            {"You have not tasks"}
+                            {TODO_LIST_EMPTY}
                         </Typography>
                     ) : (
                         <div>
-                            {items.map((item, id) => (
+                            <TodoListProgress
+                                totalTasks={tasks.length}
+                                completedTask={completedTasks.length}
+                            />
+                            {tasks.map((item, id) => (
                                 <TodoListItem
                                     key={id}
                                     {...item}
@@ -65,7 +119,7 @@ const TodoList: React.FC<ITodoListProps> = ({
                         </div>
                     )}
                 </TodoListPaper>
-                <TodoListActions onAdd={onAdd} />
+                <TodoListActions onAdd={handleAdd} />
             </TodoListContainer>
             <ConfirmDialog
                 isOpen={isOpen}
@@ -73,6 +127,13 @@ const TodoList: React.FC<ITodoListProps> = ({
                 dialogContent={content}
                 handleConfirm={confirm}
                 handleCancel={closeDialog}
+            />
+            <FormModal
+                isOpen={isOpenForm}
+                title={titleForm}
+                form={contentForm}
+                handleSubmit={sendForm}
+                handleClose={closeForm}
             />
         </React.Fragment>
     );

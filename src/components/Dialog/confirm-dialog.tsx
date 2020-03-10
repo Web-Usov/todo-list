@@ -5,6 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { Typography, styled } from "@material-ui/core";
 
 interface IProps {
     isOpen: boolean;
@@ -14,6 +15,12 @@ interface IProps {
     handleCancel?: () => void;
 }
 
+const Title = styled(Typography)({
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis"
+});
+
 export const ConfirmDialog = (props: IProps): ReactElement => {
     return (
         <Dialog
@@ -22,7 +29,9 @@ export const ConfirmDialog = (props: IProps): ReactElement => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
+            <DialogTitle disableTypography id="alert-dialog-title">
+                <Title variant="h6">{props.title}</Title>
+            </DialogTitle>
             <DialogContent>
                 <DialogContentText
                     id="alert-dialog-description"
