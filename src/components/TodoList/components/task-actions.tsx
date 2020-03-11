@@ -12,7 +12,7 @@ interface ITodoListItemActionsProps {
     isEdit: boolean;
     isDone: boolean;
 }
-export const TodoListItemActions = ({
+export const TaskActions = ({
     onDelete,
     onFlag,
     onEdit,

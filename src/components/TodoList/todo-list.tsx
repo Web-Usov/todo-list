@@ -1,6 +1,6 @@
 import React from "react";
 import { TodoListPaper, TodoListContainer } from "./styles";
-import { TodoListItem } from "./components/todo-list-item";
+import { Task } from "./components/task";
 import { Typography } from "@material-ui/core";
 import { observer } from "mobx-react";
 import TodoListActions from "./components/todo-list-actions";
@@ -104,7 +104,7 @@ const TodoList: React.FC<ITodoListProps> = ({
                                 completedTask={completedTasks.length}
                             />
                             {tasks.map((item, id) => (
-                                <TodoListItem
+                                <Task
                                     key={id}
                                     {...item}
                                     onDelete={() =>
