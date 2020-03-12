@@ -3,7 +3,8 @@ import { Paper, Button, Typography, LinearProgress } from "@material-ui/core";
 
 // Todo list
 export const TodoListPaper = styled(Paper)(({ theme }) => ({
-    width: 400,
+    // maxWidth: 400,
+    // width: "100%",
     padding: theme.spacing(3),
     maxHeight: "90%",
     overflowY: "auto",
@@ -14,7 +15,9 @@ export const TodoListContainer = styled("div")({
     flexDirection: "row",
     alignItems: "flex-start",
     flexGrow: 1,
-    maxHeight: "100%"
+    maxHeight: "100%",
+    maxWidth: 500,
+    width: "100%"
 });
 
 // Todo list - task
